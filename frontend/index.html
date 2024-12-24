@@ -42,24 +42,30 @@
 
     <!-- Movies Section -->
     <section id="movies-section" class="crud-section hidden">
-      <h2>Manage Movies</h2>
-      <button id="add-movie-btn">Add New Movie</button>
-      <table id="movies-table">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Genre</th>
-            <th>Director</th>
-            <th>Release Year</th>
-            <th>Description</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Dynamically populated rows -->
-        </tbody>
-      </table>
+        <h2>Manage Movies</h2>
+        <button id="add-movie-btn">Add New Movie</button>
+        <table id="movies-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Genre</th>
+              <th>Director</th>
+              <th>Release Year</th>
+              <th>Description</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Dynamically populated rows -->
+          </tbody>
+        </table>
+        <div id="pagination-controls">
+          <button id="prev-page" disabled>Previous</button>
+          <span id="current-page">Page 1</span>
+          <button id="next-page">Next</button>
+        </div>
     </section>
+      
 
     <!-- Reviews Section -->
     <section id="reviews-section" class="crud-section hidden">

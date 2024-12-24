@@ -1,35 +1,64 @@
+let currentPage = 1;
+const pageSize = 1; 
+
 const fetchMovies = async () => {
-    try {
-        const response = await fetch(`${API_URL}/movies`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch movies.');
-        }
-        const movies = await response.json();
+  try {
+    const offset = (currentPage - 1) * pageSize;
 
-        const moviesTable = document.querySelector('#movies-table tbody');
-        moviesTable.innerHTML = ''; // Clear the table
-
-        movies.forEach(movie => {
-            const row = `
-                <tr>
-                    <td>${movie.title}</td>
-                    <td>${movie.genre}</td>
-                    <td>${movie.director}</td>
-                    <td>${movie.releaseYear}</td>
-                    <td>${movie.description}</td>
-                    <td>
-                        <button onclick="editMovie(${movie.id})">Edit</button>
-                        <button onclick="deleteMovie(${movie.id})">Delete</button>
-                    </td>
-                </tr>
-            `;
-            moviesTable.innerHTML += row;
-        });
-    } catch (error) {
-        console.error('Error fetching movies:', error);
-        alert('Failed to load movies. Please try again.');
+    const response = await fetch(`${API_URL}/movies?limit=${pageSize}&offset=${offset}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch movies.');
     }
+
+    const movies = await response.json();
+    const moviesTable = document.querySelector('#movies-table tbody');
+    moviesTable.innerHTML = '';
+
+    movies.forEach((movie) => {
+      const row = `
+        <tr>
+          <td>${movie.title}</td>
+          <td>${movie.genre}</td>
+          <td>${movie.director}</td>
+          <td>${movie.releaseYear}</td>
+          <td>${movie.description}</td>
+          <td>
+            <button onclick="editMovie(${movie.id})">Edit</button>
+            <button onclick="deleteMovie(${movie.id})">Delete</button>
+          </td>
+        </tr>
+      `;
+      moviesTable.innerHTML += row;
+    });
+
+    updatePaginationControls();
+  } catch (error) {
+    console.error('Error fetching movies:', error.message);
+    alert('Failed to load movies. Please try again.');
+  }
 };
+const updatePaginationControls = () => {
+    document.querySelector('#current-page').textContent = `Page ${currentPage}`;
+    document.querySelector('#prev-page').disabled = currentPage === 1;
+  };
+  
+  document.querySelector('#prev-page').addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--;
+      fetchMovies();
+    }
+  });
+  
+  document.querySelector('#next-page').addEventListener('click', () => {
+    currentPage++;
+    fetchMovies();
+  });
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    fetchMovies();
+  });
+  
+
 
 const addMovie = async () => {
     const title = prompt('Enter movie title:');
