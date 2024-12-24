@@ -5,11 +5,18 @@ const { Op } = require('sequelize');
 
 // Get all movies
 router.get('/', async (req, res) => {
+    const { limit = 1, offset = 0 } = req.query; 
+
     try {
-        const movies = await Movie.findAll();
+        const movies = await Movie.findAll({
+            limit: parseInt(limit), 
+            offset: parseInt(offset), 
+        });
+
         res.json(movies);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error(error);
+        res.status(500).json({ error: 'Failed to fetch movies' });
     }
 });
 
