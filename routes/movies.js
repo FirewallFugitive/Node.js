@@ -34,12 +34,23 @@ router.get('/:id', async (req, res) => {
 // Create a new movie
 router.post('/', async (req, res) => {
     try {
-        const movie = await Movie.create(req.body);
+        console.log('Request payload:', req.body); // Log the received data
+
+        const { title, genre, director, releaseYear, description } = req.body;
+
+        // Ensure all fields are present
+        if (!title || !genre || !director || !releaseYear || !description) {
+            return res.status(400).json({ error: 'All fields are required.' });
+        }
+
+        const movie = await Movie.create(req.body); // Insert movie
         res.status(201).json(movie);
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        console.error('Error adding movie:', error); // Log database errors
+        res.status(500).json({ error: 'Failed to add movie', details: error.message });
     }
 });
+
 
 // Update a movie by ID
 router.put('/:id', async (req, res) => {

@@ -120,4 +120,91 @@
       transform: translateY(0);
     }
   }
+  /* Scoped Styles for Add Movie Page */
+#add-movie-page {
+  margin: 2rem auto;
+  padding: 2rem;
+  max-width: 800px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+#add-movie-page h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #3F51B5;
+  font-size: 1.8rem;
+}
+
+#add-movie-page .movie-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: space-between;
+}
+
+#add-movie-page .form-group {
+  flex: 1 1 calc(50% - 1rem); /* Two columns */
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+#add-movie-page .form-group.full-width {
+  flex: 1 1 100%; /* Full width for larger fields */
+}
+
+#add-movie-page .form-label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #3F51B5;
+}
+
+#add-movie-page .form-input,
+#add-movie-page .form-textarea {
+  padding: 0.8rem;
+  border: 1px solid #E0E0E0;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#add-movie-page .form-input:focus,
+#add-movie-page .form-textarea:focus {
+  border-color: #3F51B5;
+  box-shadow: 0 0 5px rgba(63, 81, 181, 0.5);
+  outline: none;
+}
+
+#add-movie-page .form-textarea {
+  resize: none;
+  height: 100px;
+}
+
+#add-movie-page .btn-primary {
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #3F51B5;
+  color: #fff;
+  transition: background-color 0.3s, transform 0.2s;
+  width: 100%;
+  text-align: center;
+}
+
+#add-movie-page .btn-primary:hover {
+  background-color: #303F9F;
+  transform: translateY(-3px);
+}
+
+#add-movie-page .btn-primary:active {
+  transform: translateY(0);
+}
+
   

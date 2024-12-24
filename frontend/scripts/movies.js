@@ -145,5 +145,7 @@ const deleteMovie = async (movieId) => {
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     fetchMovies();
-    document.querySelector('#add-movie-btn').addEventListener('click', addMovie);
+    document.querySelector('#add-movie-btn').addEventListener('click', () => {
+      window.location.href = 'add-movie.html';
+    });
 });

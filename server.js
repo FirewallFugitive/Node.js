@@ -22,6 +22,10 @@ app.get('/docs', (req, res) => {
     res.sendFile(path.join(__dirname, 'frontend', 'docs.html'));
 });
 
+app.get('/add-movie.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend', 'add-movie.html'));
+});
+
 sequelize.sync({ force: false }) 
     .then(() => {
         console.log('Database connected and synchronized');

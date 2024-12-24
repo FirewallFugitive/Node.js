@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a New Movie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Add a New Movie</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="movies.html">Manage Movies</a>
+        </nav>
+    </header>
+
+    <main id="add-movie-page">
+        <h2>Movie Details</h2>
+        <form id="add-movie-form" class="movie-form">
+            <div class="form-group">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" id="title" name="title" class="form-input" placeholder="Movie title" required />
+            </div>
+            <div class="form-group">
+                <label for="genre" class="form-label">Genre</label>
+                <input type="text" id="genre" name="genre" class="form-input" placeholder="Movie genre" />
+            </div>
+            <div class="form-group">
+                <label for="director" class="form-label">Director</label>
+                <input type="text" id="director" name="director" class="form-input" placeholder="Movie director" />
+            </div>
+            <div class="form-group">
+                <label for="releaseYear" class="form-label">Release Year</label>
+                <input type="number" id="releaseYear" name="releaseYear" class="form-input" placeholder="Release year" required />
+            </div>
+            <div class="form-group full-width">
+                <label for="description" class="form-label">Description</label>
+                <textarea id="description" name="description" class="form-textarea" placeholder="Movie description"></textarea>
+            </div>
+            <button type="submit" class="btn-primary">Add Movie</button>
+        </form>
+    </main>
+    <script src="scripts/config.js"></script>
+    <script src="scripts/add-movie.js"></script>
+</body>
+</html>
