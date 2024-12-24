@@ -1,0 +1,31 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "Backend Web Project => Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FirewallFugitive/Node.js.git"
+  },
+  "keywords": [
+    "node",
+    "node.js",
+    "project"
+  ],
+  "author": "Lucas Moons",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FirewallFugitive/Node.js/issues"
+  },
+  "homepage": "https://github.com/FirewallFugitive/Node.js#readme",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mysql2": "^3.12.0",
+    "sequelize": "^6.37.5"
+  }
+}
