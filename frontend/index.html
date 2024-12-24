@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Film Reviews Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Film Reviews Management</h1>
+    <nav>
+      <a href="#" id="view-home">Home</a>
+      <a href="#" id="view-movies">Movies</a>
+      <a href="#" id="view-reviews">Reviews</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Start Screen Section -->
+    <section id="start-screen" class="fade-in">
+        <h2>Welcome to Film Reviews Management</h2>
+        <p>Search for a movie to get started:</p>
+        <form id="search-form">
+          <input type="text" id="search-bar" placeholder="Search for a movie...">
+          <button type="submit">Search</button>
+        </form>
+        <div id="search-results" class="hidden">
+          <h3>Search Results:</h3>
+          <ul id="results-list">
+            <!-- Search results dynamically populated here -->
+          </ul>
+        </div>
+        <div id="movie-details" class="hidden">
+          <h3>Movie Details:</h3>
+          <div id="movie-info">
+            <!-- Movie details dynamically displayed here -->
+          </div>
+        </div>
+      </section>      
+
+    <!-- Movies Section -->
+    <section id="movies-section" class="crud-section hidden">
+      <h2>Manage Movies</h2>
+      <button id="add-movie-btn">Add New Movie</button>
+      <table id="movies-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Director</th>
+            <th>Release Year</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Dynamically populated rows -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews-section" class="crud-section hidden">
+        <h2>Manage Reviews</h2>
+        <button id="add-review-btn">Add New Review</button>
+        <table id="reviews-table">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Rating</th>
+              <th>Review</th>
+              <th>Title</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Review rows dynamically added here -->
+          </tbody>
+        </table>
+    </section>
+  </main>
+
+  <script src="scripts/config.js"></script>
+  <script src="scripts/movies.js"></script>
+  <script src="scripts/reviews.js"></script>
+  <script src="scripts/search.js"></script>
+  <script src="scripts/navigation.js"></script>
+</body>
+</html>

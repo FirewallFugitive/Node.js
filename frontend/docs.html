@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Documentation</title>
+</head>
+<body>
+  <header>
+    <h1>API Documentation</h1>
+    <p>This page provides an overview of the available API endpoints for the Film Reviews Management system.</p>
+  </header>
+
+  <main>
+    <section id="movies-api">
+      <h2>Movies API</h2>
+
+      <h3>1. Get All Movies</h3>
+      <p><strong>Method:</strong> GET</p>
+      <p><strong>Endpoint:</strong> /movies</p>
+      <p>Description: Fetch all movies.</p>
+
+      <h3>2. Get a Movie by ID</h3>
+      <p><strong>Method:</strong> GET</p>
+      <p><strong>Endpoint:</strong> /movies/{id}</p>
+      <p>Description: Retrieve details of a specific movie by its ID.</p>
+
+      <h3>3. Search for Movies</h3>
+      <p><strong>Method:</strong> GET</p>
+      <p><strong>Endpoint:</strong> /movies/search?query={searchTerm}</p>
+      <p>Description: Search for movies by a search term.</p>
+
+      <h3>4. Create a New Movie</h3>
+      <p><strong>Method:</strong> POST</p>
+      <p><strong>Endpoint:</strong> /movies</p>
+      <p>Description: Add a new movie by providing its details.</p>
+
+      <h3>5. Update a Movie</h3>
+      <p><strong>Method:</strong> PUT</p>
+      <p><strong>Endpoint:</strong> /movies/{id}</p>
+      <p>Description: Update an existing movie by its ID.</p>
+
+      <h3>6. Delete a Movie</h3>
+      <p><strong>Method:</strong> DELETE</p>
+      <p><strong>Endpoint:</strong> /movies/{id}</p>
+      <p>Description: Delete a movie by its ID.</p>
+    </section>
+
+    <section id="reviews-api">
+      <h2>Reviews API</h2>
+
+      <h3>1. Get All Reviews</h3>
+      <p><strong>Method:</strong> GET</p>
+      <p><strong>Endpoint:</strong> /reviews</p>
+      <p>Description: Retrieve all reviews.</p>
+
+      <h3>2. Get Reviews for a Movie</h3>
+      <p><strong>Method:</strong> GET</p>
+      <p><strong>Endpoint:</strong> /reviews/{movieId}</p>
+      <p>Description: Retrieve all reviews for a specific movie.</p>
+
+      <h3>3. Add a New Review</h3>
+      <p><strong>Method:</strong> POST</p>
+      <p><strong>Endpoint:</strong> /reviews/{movieId}</p>
+      <p>Description: Add a new review for a specific movie.</p>
+
+      <h3>4. Update a Review</h3>
+      <p><strong>Method:</strong> PUT</p>
+      <p><strong>Endpoint:</strong> /reviews/{id}</p>
+      <p>Description: Update an existing review by its ID.</p>
+
+      <h3>5. Delete a Review</h3>
+      <p><strong>Method:</strong> DELETE</p>
+      <p><strong>Endpoint:</strong> /reviews/{id}</p>
+      <p>Description: Delete a review by its ID.</p>
+    </section>
+
+    <section id="errors">
+      <h2>Error Responses</h2>
+
+      <h3>400 - Bad Request</h3>
+      <p>The request is invalid or missing required parameters.</p>
+
+      <h3>404 - Not Found</h3>
+      <p>The requested resource could not be found.</p>
+
+      <h3>500 - Internal Server Error</h3>
+      <p>An unexpected error occurred on the server.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Film Reviews Management API</p>
+  </footer>
+</body>
+</html>
