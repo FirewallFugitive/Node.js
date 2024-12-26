@@ -1,43 +1,30 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../db');
+'use strict';
 
-const Movie = sequelize.define('Movie', {
+module.exports = (sequelize, DataTypes) => {
+  const Movie = sequelize.define('Movie', {
     title: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: "Title cannot be empty" }
-        }
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     genre: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: "Genre cannot be empty" }
-        }
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     director: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: "Director cannot be empty" }
-        }
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     releaseYear: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-            isInt: { msg: "Release year must be an integer" }
-        }
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     description: {
-        type: DataTypes.TEXT,
-        allowNull: true
-    }
-}, {
+      type: DataTypes.TEXT,
+    },
+  }, {
     tableName: 'Movies',
-    timestamps: false, 
-});
+    timestamps: false,
+  });
 
-module.exports = Movie;
-
+  return Movie; // Must return the model
+};

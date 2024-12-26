@@ -1,17 +1,25 @@
 const express = require('express');
 const router = express.Router();
-const Review = require('../models/review');
+const { Review, Movie } = require('../models');
 
 
 router.get('/', async (req, res) => {
     try {
-        const reviews = await Review.findAll();
-        res.json(reviews);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Failed to fetch reviews' });
+      const reviews = await Review.findAll({
+        include: [
+          {
+            model: Movie,
+            attributes: ['id', 'title'], // Include only the necessary fields
+          },
+        ],
+      });
+  
+      res.json(reviews || []); // Ensure an array is returned
+    } catch (error) {
+      console.error('Error fetching reviews:', error);
+      res.status(500).json({ error: 'Failed to fetch reviews' });
     }
-});
+  });
 
 
 router.post('/:movieId', async (req, res) => {

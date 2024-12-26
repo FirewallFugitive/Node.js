@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+</head>
+<body>
+  <h1>Login</h1>
+  <form id="login-form">
+    <input type="text" id="username" placeholder="Username"><br>
+    <input type="password" id="password" placeholder="Password"><br>
+    <button type="submit">Login</button>
+  </form>
+
+  <script>
+    document.getElementById('login-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      try {
+        const response = await fetch('http://localhost:3000/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password }),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          alert('Login failed: ' + (errorData.error || response.statusText));
+          return;
+        }
+
+        const data = await response.json();
+        alert(`Login successful! Token: ${data.token}`);
+
+        localStorage.setItem('jwtToken', data.token);
+
+      } catch (error) {
+        console.error('Error logging in:', error);
+        alert('An error occurred while logging in.');
+      }
+    });
+  </script>
+</body>
+</html>

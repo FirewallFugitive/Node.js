@@ -1,43 +1,41 @@
 const fetchReviews = async () => {
     try {
-        const response = await fetch(`${API_URL}/reviews`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch reviews.');
-        }
-        const reviews = await response.json();
-
-        const moviesResponse = await fetch(`${API_URL}/movies`);
-        if (!moviesResponse.ok) {
-            throw new Error('Failed to fetch movies.');
-        }
-        const movies = await moviesResponse.json();
-
-        const reviewsTable = document.querySelector('#reviews-table tbody');
-        reviewsTable.innerHTML = ''; // Clear the table
-
-        reviews.forEach(review => {
-            const movie = movies.find(movie => movie.id === review.fk_movieId);
-            const movieTitle = movie ? movie.title : 'Unknown';
-
-            const row = `
-                <tr>
-                    <td>${review.username}</td>
-                    <td>${review.rating}</td>
-                    <td>${review.review}</td>
-                    <td>${movieTitle}</td>
-                    <td>
-                        <button onclick="editReview(${review.id})">Edit</button>
-                        <button onclick="deleteReview(${review.id})">Delete</button>
-                    </td>
-                </tr>
-            `;
-            reviewsTable.innerHTML += row;
-        });
+      const response = await fetch(`${API_URL}/reviews`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch reviews.');
+      }
+  
+      const reviews = await response.json();
+  
+      if (!Array.isArray(reviews)) {
+        throw new Error('Invalid response: reviews is not an array.');
+      }
+  
+      const reviewsTable = document.querySelector('#reviews-table tbody');
+      reviewsTable.innerHTML = ''; // Clear the table
+  
+      reviews.forEach((review) => {
+        const movieTitle = review.Movie ? review.Movie.title : 'Unknown'; // Use movie data from backend
+        const row = `
+          <tr>
+            <td>${review.username}</td>
+            <td>${review.rating}</td>
+            <td>${review.review}</td>
+            <td>${movieTitle}</td>
+            <td>
+              <button onclick="editReview(${review.id})">Edit</button>
+              <button onclick="deleteReview(${review.id})">Delete</button>
+            </td>
+          </tr>
+        `;
+        reviewsTable.innerHTML += row;
+      });
     } catch (error) {
-        console.error('Error fetching reviews:', error);
-        alert('Failed to load reviews. Please try again.');
+      console.error('Error fetching reviews:', error.message);
+      alert('Failed to load reviews. Please try again.');
     }
-};
+  };
+  
 
 const addReview = async () => {
     const username = prompt('Enter username:');

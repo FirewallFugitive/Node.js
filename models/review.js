@@ -1,44 +1,34 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../db');
-const Movie = require('./movie');
+'use strict';
 
-const Review = sequelize.define('Review', {
+module.exports = (sequelize, DataTypes) => {
+  const Review = sequelize.define('Review', {
     username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: "Username cannot be empty" }
-        }
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     rating: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-            isInt: { msg: "Rating must be an integer" },
-            min: 1,
-            max: 5
-        }
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        min: 1,
+        max: 5,
+      },
     },
     review: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: "Review cannot be empty" }
-        }
-    }
-});
-
-// Define relationships with explicitly named foreign keys
-Review.belongsTo(Movie, {
-    foreignKey: {
-        name: 'fk_movieId',
-        allowNull: false
+      type: DataTypes.TEXT,
+      allowNull: false,
     },
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE'
-});
-Movie.hasMany(Review, {
-    foreignKey: 'fk_movieId'
-});
+  }, {
+    tableName: 'Reviews',
+    timestamps: false,
+  });
 
-module.exports = Review;
+  Review.associate = (models) => {
+    Review.belongsTo(models.Movie, {
+      foreignKey: 'fk_movieId',
+      allowNull: false,
+    });
+  };
+
+  return Review; // Must return the model
+};
