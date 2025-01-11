@@ -10,9 +10,8 @@ Dit project is een Node-js webapplicatie waarmee gebruikers kunnen zoeken voor b
 
 1. [Functionaliteiten](#functionaliteiten)
 2. [Installatie](#installatie)
-3. [Database opzetten en vullen](#database-opzetten-en-vullen)
-4. [Gebruik](#gebruik)
-5. [Bronnen](#bronnen)
+3. [Starten van de applicatie](#starten-van-de-applicatie)
+
 
 ## Functionaliteiten
 
