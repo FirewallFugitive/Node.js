@@ -11,6 +11,7 @@ Dit project is een Node-js webapplicatie waarmee gebruikers kunnen zoeken voor b
 1. [Functionaliteiten](#functionaliteiten)
 2. [Installatie](#installatie)
 3. [Starten van de applicatie](#starten-van-de-applicatie)
+4. [Bronnen](#bronnen).
 
 
 ## Functionaliteiten
@@ -53,3 +54,9 @@ Dit project is een Node-js webapplicatie waarmee gebruikers kunnen zoeken voor b
    ```bash
    node server.js
    ```
+
+## Bronnen
+https://developer.mozilla.org/en-US/docs/Web/HTML
+https://expressjs.com/
+https://nodejs.org/api/all.html
+
