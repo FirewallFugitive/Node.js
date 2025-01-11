@@ -86,4 +86,19 @@ router.get('/:id', async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch review.' });
     }
 });
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const review = await Review.findByPk(req.params.id);
+        if (!review) {
+            return res.status(404).json({ error: 'Review not found' });
+        }
+
+        await review.destroy();
+        res.json({ message: 'Review deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting review:', error);
+        res.status(500).json({ error: 'Failed to delete review' });
+    }
+});
 module.exports = router;

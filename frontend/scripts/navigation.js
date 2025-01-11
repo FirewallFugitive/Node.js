@@ -1,13 +1,9 @@
-// scripts/navigation.js
-
-// Gather references to your sections
 const sections = {
   home: document.getElementById('start-screen'),
   movies: document.getElementById('movies-section'),
   reviews: document.getElementById('reviews-section'),
 };
 
-// A helper function to hide all sections
 function hideAllSections() {
   Object.values(sections).forEach(section => section.classList.add('hidden'));
 }

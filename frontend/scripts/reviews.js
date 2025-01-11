@@ -133,6 +133,8 @@ const deleteReview = async (reviewId) => {
             alert('Review deleted successfully!');
             fetchReviews();
         } else {
+            const responseData = await response.json();
+            console.error('Server error:', responseData);
             throw new Error('Failed to delete review.');
         }
     } catch (error) {
