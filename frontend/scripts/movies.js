@@ -1,11 +1,10 @@
 let currentPage = 1;
-const pageSize = 1; // 1 movie per page
+const pageSize = 1;
 
 const fetchMovies = async () => {
   try {
     const offset = (currentPage - 1) * pageSize;
 
-    // Fetch paginated movies
     const response = await fetch(`${API_URL}/movies?limit=${pageSize}&offset=${offset}`);
     if (!response.ok) {
       throw new Error('Failed to fetch movies.');
@@ -13,15 +12,13 @@ const fetchMovies = async () => {
 
     const data = await response.json();
 
-    // Ensure `movies` exists and is an array
     if (!data.movies || !Array.isArray(data.movies)) {
       throw new Error('Invalid response: movies is undefined or not an array.');
     }
 
     const moviesTable = document.querySelector('#movies-table tbody');
-    moviesTable.innerHTML = ''; // Clear the table before populating
+    moviesTable.innerHTML = '';
 
-    // Populate the table with movies
     if (data.movies.length === 0) {
       moviesTable.innerHTML = '<tr><td colspan="6">No movies available.</td></tr>';
     } else {
@@ -44,7 +41,6 @@ const fetchMovies = async () => {
     }
 
     attachActionListeners();
-    // Update pagination controls
     updatePaginationControls(data.currentPage, data.totalPages);
   } catch (error) {
     console.error('Error fetching movies:', error.message);
@@ -52,7 +48,6 @@ const fetchMovies = async () => {
   }
 };
 const attachActionListeners = () => {
-  // Attach event listeners for Edit buttons
   document.querySelectorAll('.edit-btn').forEach((button) => {
     button.addEventListener('click', () => {
       const movieId = button.dataset.id;
@@ -60,7 +55,6 @@ const attachActionListeners = () => {
     });
   });
 
-  // Attach event listeners for Delete buttons
   document.querySelectorAll('.delete-btn').forEach((button) => {
     button.addEventListener('click', () => {
       const movieId = button.dataset.id;
@@ -127,7 +121,7 @@ const editMovie = async (movieId) => {
 
       if (response.ok) {
           alert('Movie updated successfully!');
-          fetchMovies(); // Refresh the table
+          fetchMovies();
       } else {
           const responseData = await response.json();
           console.error('Server error:', responseData);

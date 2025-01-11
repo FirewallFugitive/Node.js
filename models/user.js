@@ -22,8 +22,5 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
   });
 
-  // optional associations, e.g.:
-  // User.associate = (models) => { ... };
-
   return User;
 };

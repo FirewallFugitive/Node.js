@@ -5,7 +5,7 @@ const path = require('path');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
-const { User } = require('../models'); // User model uit index.js
+const { User } = require('../models');
 const JWT_SECRET = process.env.JWT_SECRET || 'super-secret-key';
 
 // REGISTER
@@ -37,7 +37,6 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ error: 'Invalid username or password' });
     }
 
-    // Compare password met de gehashte in DB
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
       return res.status(401).json({ error: 'Invalid username or password' });
@@ -52,7 +51,6 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Optioneel: GET /auth/login geeft een loginpagina
 router.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'frontend', 'login.html'));
 });

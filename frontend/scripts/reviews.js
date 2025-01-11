@@ -87,7 +87,6 @@ const fetchReviews = async () => {
 
 const editReview = async (reviewId) => {
     try {
-        // Fetch the current review details
         const reviewResponse = await fetch(`${API_URL}/reviews/${reviewId}`);
         if (!reviewResponse.ok) {
             alert('Failed to fetch the review details. Please try again.');
@@ -95,7 +94,6 @@ const editReview = async (reviewId) => {
         }
         const reviewDetails = await reviewResponse.json();
 
-        // Get new values for editable fields
         const username = prompt('Enter new username:', reviewDetails.username);
         const rating = parseInt(prompt('Enter new rating (1-5):', reviewDetails.rating), 10);
         const review = prompt('Enter new review:', reviewDetails.review);
@@ -105,16 +103,15 @@ const editReview = async (reviewId) => {
             return;
         }
 
-        // Send updated data to the server
         const response = await fetch(`${API_URL}/reviews/${reviewId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, rating, review }), // No need to include fk_movieId
+            body: JSON.stringify({ username, rating, review }),
         });
 
         if (response.ok) {
             alert('Review updated successfully!');
-            fetchReviews(); // Refresh the reviews table
+            fetchReviews(); 
         } else {
             throw new Error('Failed to update review.');
         }
