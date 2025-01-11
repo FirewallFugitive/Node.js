@@ -56,7 +56,7 @@ Dit project is een Node-js webapplicatie waarmee gebruikers kunnen zoeken voor b
    ```
 
 ## Bronnen
-https://developer.mozilla.org/en-US/docs/Web/HTML
-https://expressjs.com/
-https://nodejs.org/api/all.html
+- https://developer.mozilla.org/en-US/docs/Web/HTML
+- https://expressjs.com/
+- https://nodejs.org/api/all.html
 
