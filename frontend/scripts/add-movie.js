@@ -63,7 +63,6 @@ const addMovie = async () => {
         }
         
         alert('Movie added successfully!');
-        fetchMovies();
     } catch (error) {
         console.error('Error adding movie:', error.message);
         alert('Failed to add the movie. Please try again.');

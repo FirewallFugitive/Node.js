@@ -37,28 +37,37 @@ const fetchReviews = async () => {
   };
   
 
-const addReview = async () => {
+  const addReview = async () => {
     const username = prompt('Enter username:');
     const rating = parseInt(prompt('Enter rating (1-5):'), 10);
     const review = prompt('Enter review:');
 
-    const moviesResponse = await fetch(`${API_URL}/movies`);
-    if (!moviesResponse.ok) {
-        alert('Failed to fetch movies. Please try again.');
-        return;
-    }
-    const movies = await moviesResponse.json();
-    const movieOptions = movies.map(movie => `${movie.id}: ${movie.title}`).join('\n');
-    const movieSelection = prompt(`Enter the movie ID for the review:\n${movieOptions}`);
-    const fk_movieId = parseInt(movieSelection, 10);
-
-    if (!username || isNaN(rating) || !review || isNaN(fk_movieId)) {
-        alert('Please fill in all fields correctly.');
-        return;
-    }
-
     try {
-        const response = await fetch(`${API_URL}/reviews`, {
+        // Fetch movies for the dropdown
+        const moviesResponse = await fetch(`${API_URL}/movies`);
+        if (!moviesResponse.ok) {
+            alert('Failed to fetch movies. Please try again.');
+            return;
+        }
+
+        const movies = await moviesResponse.json();
+        const moviesList = movies.movies || []; // Safely access the array
+        if (moviesList.length === 0) {
+            alert('No movies available to review.');
+            return;
+        }
+
+        const movieOptions = moviesList.map(movie => `${movie.id}: ${movie.title}`).join('\n');
+        const movieSelection = prompt(`Enter the movie ID for the review:\n${movieOptions}`);
+        const fk_movieId = parseInt(movieSelection, 10);
+
+        if (!username || isNaN(rating) || !review || isNaN(fk_movieId)) {
+            alert('Please fill in all fields correctly.');
+            return;
+        }
+
+        // Send POST request to add the review
+        const response = await fetch(`${API_URL}/reviews/${fk_movieId}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, rating, review, fk_movieId }),
@@ -66,51 +75,51 @@ const addReview = async () => {
 
         if (response.ok) {
             alert('Review added successfully!');
-            fetchReviews();
+            fetchReviews(); // Refresh the reviews table
         } else {
             throw new Error('Failed to add review.');
         }
     } catch (error) {
-        console.error('Error adding review:', error);
+        console.error('Error adding review:', error.message);
         alert('Failed to add the review. Please try again.');
     }
 };
 
 const editReview = async (reviewId) => {
-    const username = prompt('Enter new username:');
-    const rating = parseInt(prompt('Enter new rating (1-5):'), 10);
-    const review = prompt('Enter new review:');
-
-    const moviesResponse = await fetch(`${API_URL}/movies`);
-    if (!moviesResponse.ok) {
-        alert('Failed to fetch movies. Please try again.');
-        return;
-    }
-    const movies = await moviesResponse.json();
-    const movieOptions = movies.map(movie => `${movie.id}: ${movie.title}`).join('\n');
-    const movieSelection = prompt(`Enter the new movie ID for the review:\n${movieOptions}`);
-    const fk_movieId = parseInt(movieSelection, 10);
-
-    if (!username || isNaN(rating) || !review || isNaN(fk_movieId)) {
-        alert('Please fill in all fields correctly.');
-        return;
-    }
-
     try {
+        // Fetch the current review details
+        const reviewResponse = await fetch(`${API_URL}/reviews/${reviewId}`);
+        if (!reviewResponse.ok) {
+            alert('Failed to fetch the review details. Please try again.');
+            return;
+        }
+        const reviewDetails = await reviewResponse.json();
+
+        // Get new values for editable fields
+        const username = prompt('Enter new username:', reviewDetails.username);
+        const rating = parseInt(prompt('Enter new rating (1-5):', reviewDetails.rating), 10);
+        const review = prompt('Enter new review:', reviewDetails.review);
+
+        if (!username || isNaN(rating) || !review) {
+            alert('Please fill in all fields correctly.');
+            return;
+        }
+
+        // Send updated data to the server
         const response = await fetch(`${API_URL}/reviews/${reviewId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, rating, review, fk_movieId }),
+            body: JSON.stringify({ username, rating, review }), // No need to include fk_movieId
         });
 
         if (response.ok) {
             alert('Review updated successfully!');
-            fetchReviews();
+            fetchReviews(); // Refresh the reviews table
         } else {
             throw new Error('Failed to update review.');
         }
     } catch (error) {
-        console.error('Error updating review:', error);
+        console.error('Error updating review:', error.message);
         alert('Failed to update the review. Please try again.');
     }
 };

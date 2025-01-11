@@ -48,3 +48,4 @@ document.querySelector('#view-reviews').addEventListener('click', (event) => {
     fetchReviews();
   }
 });
+

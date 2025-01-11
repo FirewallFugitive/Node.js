@@ -7,27 +7,26 @@ const { Op } = require('sequelize');
 
 router.get('/', async (req, res) => {
   try {
-    const { limit = 10, offset = 0 } = req.query;
+      const { limit = 10, offset = 0 } = req.query;
 
-    const movies = await Movie.findAndCountAll({
-      limit: parseInt(limit, 10),
-      offset: parseInt(offset, 10),
-    });
+      const movies = await Movie.findAndCountAll({
+          limit: parseInt(limit, 10),
+          offset: parseInt(offset, 10),
+      });
 
-    res.json({
-      totalItems: movies.count || 0, // Total number of movies
-      totalPages: Math.ceil(movies.count / limit) || 1, // At least 1 page
-      currentPage: Math.floor(offset / limit) + 1,
-      movies: movies.rows || [], // Ensure movies is always an array
-    });
+      res.json({
+          movies: movies.rows || [],
+          totalItems: movies.count || 0,
+          totalPages: Math.ceil(movies.count / limit) || 1,
+          currentPage: Math.floor(offset / limit) + 1,
+      });
   } catch (error) {
-    console.error('Error fetching movies:', error);
-    res.status(500).json({ error: 'Failed to fetch movies', movies: [] }); // Fallback to an empty movies array
+      console.error('Error fetching movies:', error);
+      res.status(500).json({ error: 'Failed to fetch movies', movies: [] });
   }
 });
 
 
-// SEARCH (define before /:id)
 router.get('/search', async (req, res) => {
   const { q, limit = 10, offset = 0 } = req.query;
 
@@ -49,7 +48,6 @@ router.get('/search', async (req, res) => {
       offset: parseInt(offset),
     });
 
-    // Either return 404 if no matches:
     if (!movies || movies.length === 0) {
       return res.status(404).json({ error: 'Movie not found' });
     }
@@ -61,7 +59,6 @@ router.get('/search', async (req, res) => {
   }
 });
 
-// Get movie by ID
 router.get('/:id', async (req, res) => {
   try {
     const movie = await Movie.findByPk(req.params.id);
@@ -75,7 +72,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Create a new movie
 router.post('/', async (req, res) => {
   try {
     const { title, genre, director, releaseYear, description } = req.body;
@@ -94,7 +90,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Update a movie by ID
 router.put('/:id', async (req, res) => {
   try {
     const movie = await Movie.findByPk(req.params.id);
@@ -110,7 +105,6 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// Delete a movie by ID
 router.delete('/:id', async (req, res) => {
   try {
     const movie = await Movie.findByPk(req.params.id);

@@ -26,7 +26,6 @@ module.exports = (sequelize, DataTypes) => {
   Review.associate = (models) => {
     Review.belongsTo(models.Movie, {
       foreignKey: 'fk_movieId',
-      allowNull: false,
     });
   };
 
